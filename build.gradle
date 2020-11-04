@@ -189,6 +189,7 @@ okbuck {
 
     kotlin {
         version = deps.versions.kotlin
+        jvmTarget = "1.8"
     }
 
     lint {

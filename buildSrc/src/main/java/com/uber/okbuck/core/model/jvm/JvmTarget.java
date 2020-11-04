@@ -40,6 +40,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+
+import com.uber.okbuck.extension.KotlinExtension;
 import org.gradle.api.JavaVersion;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -507,8 +509,6 @@ public class JvmTarget extends Target {
           optionBuilder.add(
               "plugin:org.jetbrains.kotlin.allopen:" + option.getKey() + "=" + option.getValue());
         }
-        optionBuilder.add("-jvm-target");
-        optionBuilder.add("1.8");
       }
     }
     return optionBuilder.build();
@@ -544,7 +544,11 @@ public class JvmTarget extends Target {
       }
 
       // Args from K2JVMCompilerArguments.kt and KotlinJvmOptions.kt
-      optionBuilder.put("-jvm-target", Optional.of(options.getJvmTarget()));
+      if (KotlinExtension.jvmTarget.equals("")) {
+        optionBuilder.put("-jvm-target", Optional.of(options.getJvmTarget()));
+      } else {
+        optionBuilder.put("-jvm-target", Optional.of(KotlinExtension.jvmTarget));
+      }
       if (options.getIncludeRuntime()) {
         optionBuilder.put("-include-runtime", Optional.empty());
       }

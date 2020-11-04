@@ -26,4 +26,6 @@ public class KotlinExtension {
   public String getCompilerZipSha256() {
     return this.compilerZipSha256;
   }
+
+  public static String jvmTarget = "";
 }
