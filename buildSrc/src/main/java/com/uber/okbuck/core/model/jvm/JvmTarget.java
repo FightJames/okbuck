@@ -507,6 +507,8 @@ public class JvmTarget extends Target {
           optionBuilder.add(
               "plugin:org.jetbrains.kotlin.allopen:" + option.getKey() + "=" + option.getValue());
         }
+        optionBuilder.add("-jvm-target");
+        optionBuilder.add("1.8");
       }
     }
     return optionBuilder.build();
